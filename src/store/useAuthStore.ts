@@ -1,11 +1,19 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+export type Rol = "ESTUDIANTE" | "ADMIN";
+
 export interface Usuario {
   id: number;
+  username: string;
   nombre: string;
+  apellido: string;
   email: string;
-  rol: string;
+  rol: Rol;
+  fotoUrl: string | null;
+  activo: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface AuthState {
@@ -27,6 +35,7 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: "nexora-sesion",
+      version: 2,
     },
   ),
 );
