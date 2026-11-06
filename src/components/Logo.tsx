@@ -1,0 +1,2 @@
+import {GraduationCap} from 'lucide-react';
+export function Logo({inverse=false}:{inverse?:boolean}){return <div className="flex items-center gap-3"><span className={`grid h-11 w-11 place-items-center rounded-xl ${inverse?'bg-[#242055] text-[#b8e8ff]':'bg-navy text-white'}`}><GraduationCap size={25}/></span><span className="leading-tight"><strong className={`block text-xl tracking-tight ${inverse?'text-white':'text-navy'}`}>NEXORA</strong><span className={`text-[10px] font-extrabold tracking-[.2em] ${inverse?'text-[#9be4ec]':'text-purple'}`}>ACADEMY</span></span></div>;}

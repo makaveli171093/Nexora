@@ -1,43 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import { mensajeError } from "../lib/errores";
-
-export function useApi<T>(
-  pedir: () => Promise<T>,
-  dependencias: unknown[] = [],
-) {
-  const [data, setData] = useState<T | null>(null);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [intento, setIntento] = useState(0);
-
-  useEffect(() => {
-    let cancelado = false;
-
-    setCargando(true);
-    setError(null);
-
-    pedir()
-      .then((resultado) => {
-        if (!cancelado) setData(resultado);
-      })
-      .catch((err: unknown) => {
-        if (!cancelado) setError(mensajeError(err));
-      })
-      .finally(() => {
-        if (!cancelado) setCargando(false);
-      });
-
-    return () => {
-      cancelado = true;
-    };
-    // La función pedir debe ser estable o depender
-    // de las variables declaradas en dependencias.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [intento, ...dependencias]);
-
-  const recargar = useCallback(() => {
-    setIntento((actual) => actual + 1);
-  }, []);
-
-  return { data, cargando, error, recargar };
-}
+import {useCallback,useEffect,useRef,useState} from 'react';
+import {mensajeError} from '../lib/errores';
+export function useApi<T>(pedir:()=>Promise<T>,dependencias:readonly unknown[]=[]){const ref=useRef(pedir);ref.current=pedir;const [data,setData]=useState<T|null>(null);const [cargando,setCargando]=useState(true);const [error,setError]=useState<string|null>(null);const [revision,setRevision]=useState(0);useEffect(()=>{let activo=true;setCargando(true);setError(null);ref.current().then(value=>{if(activo)setData(value);}).catch(e=>{if(activo)setError(mensajeError(e));}).finally(()=>{if(activo)setCargando(false);});return()=>{activo=false;}; // dependencies supplied by caller
+// eslint-disable-next-line react-hooks/exhaustive-deps
+},[revision,...dependencias]);const recargar=useCallback(()=>setRevision(x=>x+1),[]);return {data,cargando,error,recargar};}

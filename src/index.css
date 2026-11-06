@@ -1,19 +1,23 @@
-@import "tailwindcss";
-
-:root {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-}
-
+@import 'tailwindcss';
 @theme {
-  --color-primary: #4f46e5;
-  --color-secondary: #7c3aed;
-  --color-accent: #06b6d4;
+ --color-navy:#070235;
+ --color-purple:#712ae2;
+ --color-violet:#8a4cfc;
+ --color-cyan:#0096b0;
+ --color-surface:#faf8ff;
+ --color-lavender:#f2f3ff;
+ --font-sans:'Plus Jakarta Sans',sans-serif;
+}
+:root{font-family:'Plus Jakarta Sans',sans-serif;color:#131b2e;background:#faf8ff;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+body{margin:0;min-width:320px}
+button,a,input{transition:background-color .18s ease,box-shadow .18s ease,color .18s ease}
+button{cursor:pointer}button:disabled{cursor:not-allowed}
+:focus-visible{outline:3px solid #8a4cfc;outline-offset:2px}
+@layer components{
+ .panel{@apply bg-white rounded-2xl border border-[#e8e6f3] shadow-[0_10px_34px_rgba(7,2,53,.045)];}
+ .btn-primary{@apply inline-flex items-center justify-center gap-2 rounded-xl bg-navy text-white px-5 py-3 font-bold hover:bg-purple disabled:opacity-55 disabled:hover:bg-navy;}
+ .btn-secondary{@apply inline-flex items-center justify-center gap-2 rounded-xl bg-lavender text-navy px-5 py-3 font-bold hover:bg-[#e9e6ff];}
+ .input-field{@apply w-full rounded-xl border border-[#d9d8eb] bg-white px-4 py-3 text-[#131b2e] outline-none focus:border-violet focus:ring-3 focus:ring-violet/15;}
+ .small-label{@apply text-xs font-extrabold uppercase tracking-[.11em] text-[#67647e];}
+ .page-title{@apply text-3xl md:text-4xl font-extrabold tracking-tight text-navy;}
 }

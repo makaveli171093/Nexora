@@ -1,0 +1,5 @@
+import {Link} from 'react-router-dom';
+import {ArrowRight,Compass} from 'lucide-react';
+import {Logo} from '../components/Logo';
+import {useAuthStore} from '../store/useAuthStore';
+export function NoEncontradaPage(){const token=useAuthStore(s=>s.token);return <main className="flex min-h-screen flex-col bg-surface p-7"><Logo/><section className="mx-auto flex flex-1 max-w-2xl flex-col items-center justify-center text-center"><div className="relative mb-7 grid h-40 w-40 place-items-center rounded-[40px] bg-gradient-to-br from-[#ded8ff] to-[#e6faff]"><Compass size={78} className="text-purple"/></div><span className="text-8xl font-extrabold tracking-tight text-navy">404</span><h1 className="mt-5 text-3xl font-extrabold text-navy">Página no encontrada</h1><p className="mt-4 max-w-md leading-7 text-[#777087]">Parece que la página que buscas no existe o ha cambiado de dirección.</p><Link to={token?'/inicio':'/login'} className="btn-primary mt-8">Volver al inicio<ArrowRight size={18}/></Link></section></main>;}
